@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
                 sphereCounter--;
             }
 
-            if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
+            if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
             {
                 RandomIndex();
 
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
                 sphereCounter--;
 
             }
-            else if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
+            else if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
             {
                 Debug.Log("Game Over");
 
@@ -73,7 +73,8 @@ public class GameManager : MonoBehaviour
                 restartButton.gameObject.SetActive(true);
                 gameOver.gameObject.SetActive(true);
 
-            }
+            }<anydesk
+
 
             if (sphereCounter >= 0)
             {

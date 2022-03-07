@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SphereBehaviour : MonoBehaviour
+public class ObjectBehaviour : MonoBehaviour
 {
     public GameObject box;
 
