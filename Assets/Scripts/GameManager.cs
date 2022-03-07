@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,15 +12,17 @@ public class GameManager : MonoBehaviour
     public Button restartButton;
 
     public TextMeshProUGUI BallsText;
+    public TextMeshProUGUI CountText;
+    public TextMeshProUGUI BestText;
     public TextMeshProUGUI gameOver;
 
     private float maxY = 10;
     private float rangeX = 20;
     private float rangeZ = 10;
     private float rangeIndex;
-    
+
     private int index;
-    private int sphereCounter;
+    //private int sphereCounter;
     private int parameter;
 
     public bool isGameActive = false;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         parameter = diff;
 
-        sphereCounter = 12;
+        MainManager.Instance.sphereCounter = 12;
 
         transform.position = SpawnPos(parameter);
 
@@ -43,66 +44,63 @@ public class GameManager : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    // ABSTRACTION
     void Update()
     {
 
-            if (sphereCounter >= 12 && isGameActive)
-            {
-                RandomIndex();
+        InitialThrow();
 
-                Instantiate(prefabs[index], SpawnPos(parameter), transform.rotation);
+        ObjectSpawning();
 
-                sphereCounter--;
-            }
+        TextManager();
 
-<<<<<<< Updated upstream
-            if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
-=======
-            if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
->>>>>>> Stashed changes
-            {
-                RandomIndex();
-
-                Instantiate(prefabs[index], SpawnPos(parameter), transform.rotation);
-
-                sphereCounter--;
-
-            }
-<<<<<<< Updated upstream
-            else if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
-=======
-            else if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
->>>>>>> Stashed changes
-            {
-                Debug.Log("Game Over");
-
-                isGameActive = false;
-
-                restartButton.gameObject.SetActive(true);
-                gameOver.gameObject.SetActive(true);
-
-<<<<<<< Updated upstream
-            }<anydesk
-
-=======
-            }
->>>>>>> Stashed changes
-
-            if (sphereCounter >= 0)
-            {
-                BallsText.text = "Throws left: " + sphereCounter;    
-            }
-            else if ((sphereCounter < 0))
-            {
-                BallsText.text = "Throws left: 0";
-            }
-            
-                
     }
 
-    public void UpdateCounter(int plus)
+    void InitialThrow()
     {
-        sphereCounter += plus;
+        if (MainManager.Instance.sphereCounter >= 12 && isGameActive)
+        {
+            RandomIndex();
+
+            Instantiate(prefabs[index], SpawnPos(parameter), transform.rotation);
+
+            MainManager.Instance.sphereCounter--;
+        }
+    }
+
+    void ObjectSpawning() // AND GAME OVER
+    {
+        if (FindObjectsOfType<SphereBehaviour>().Length == 0 && MainManager.Instance.sphereCounter > 0 && isGameActive)
+        {
+            RandomIndex();
+
+            Instantiate(prefabs[index], SpawnPos(parameter), transform.rotation);
+
+        }
+        else if (FindObjectsOfType<SphereBehaviour>().Length == 0 && MainManager.Instance.sphereCounter == 0 && isGameActive)
+        {
+            //GAME OVER
+
+            isGameActive = false;
+
+            restartButton.gameObject.SetActive(true);
+            gameOver.gameObject.SetActive(true);
+
+            MainManager.Instance.SaveParam();
+        }
+    }
+
+    void TextManager()
+    {
+        if (MainManager.Instance.sphereCounter >= 0)
+        {
+            BallsText.text = "Throws left: " + MainManager.Instance.sphereCounter;
+        }
+        else if ((MainManager.Instance.sphereCounter < 0))
+        {
+            BallsText.text = "Throws left: 0";
+        }
     }
 
     void RandomIndex()
@@ -143,7 +141,7 @@ public class GameManager : MonoBehaviour
     // Restart game by reloading the scene
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 

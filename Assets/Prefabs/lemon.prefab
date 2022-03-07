@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648ebf7be30bb4e6fb34254f69b7728a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 5271311132754396441, guid: d7d3616dbc962a94b89be7c5d5f07495, type: 3}
+  posFixed: {x: 0, y: 0, z: 0}
+  sphereRb: {fileID: 0}
   minSpeed: 5
   maxSpeed: 10
   torqueSpeed: 30

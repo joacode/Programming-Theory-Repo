@@ -122,10 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8407470126417715566}
   - component: {fileID: 8509201852130393477}
-  - component: {fileID: -6369871984573761080}
-  - component: {fileID: 4918853229912899793}
   - component: {fileID: 8819196429168635977}
   - component: {fileID: 8397857575208865624}
+  - component: {fileID: 4210731526236808395}
   m_Layer: 0
   m_Name: Hat
   m_TagString: Hat
@@ -164,35 +163,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-6369871984573761080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9216200083876772820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 648ebf7be30bb4e6fb34254f69b7728a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  box: {fileID: 5271311132754396441, guid: d7d3616dbc962a94b89be7c5d5f07495, type: 3}
-  minSpeed: 5
-  maxSpeed: 10
-  torqueSpeed: 30
---- !u!65 &4918853229912899793
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9216200083876772820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.23719928, y: 0.13889949, z: 0.2615109}
-  m_Center: {x: -0.03, y: 0.6639333, z: 0.012828807}
 --- !u!82 &8819196429168635977
 AudioSource:
   m_ObjectHideFlags: 0
@@ -302,3 +272,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0990779
   m_Center: {x: -0.026896676, y: 0.6660916, z: 0.013121387}
+--- !u!114 &4210731526236808395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216200083876772820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab2a178947ed3848b9b6416feda4576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  box: {fileID: 5271311132754396441, guid: d7d3616dbc962a94b89be7c5d5f07495, type: 3}
+  posFixed: {x: 0, y: 0, z: 0}
+  sphereRb: {fileID: 0}
+  minSpeed: 2
+  maxSpeed: 10
+  torqueSpeed: 30
+  speed: 0

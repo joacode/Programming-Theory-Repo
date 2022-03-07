@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class SphereBehaviour : MonoBehaviour
 {
-    public GameObject box;
+    private GameObject box;
 
-    private Vector3 posFixed;
+    public Vector3 posFixed;
 
-    private Rigidbody sphereRb;
+    public Rigidbody sphereRb;
 
     private AudioSource source;
 
-    [SerializeField] private float minSpeed = 2;
-    [SerializeField] private float maxSpeed = 10;
-    [SerializeField] private float torqueSpeed = 30;
+    private float minSpeed = 5;
+    private float maxSpeed = 10;
+    public float torqueSpeed = 30;
 
-    private Touch touch;
+    //private Touch touch;
 
     private float speed;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
+        box = GameObject.Find("Pos0");
 
         sphereRb = GetComponent<Rigidbody>();
         
@@ -33,26 +34,35 @@ public class SphereBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
-        posFixed = new Vector3(0, 0, 0) - transform.position;
+        posFixed = Direction();
 
         if (gameObject.CompareTag("Sphere"))
         {
-            sphereRb.AddTorque(RandomRotation() * Time.deltaTime * torqueSpeed, ForceMode.Impulse);
-        }
-        else if (gameObject.CompareTag("Hat"))
-        {
-            sphereRb.AddTorque(Vector3.up * Time.deltaTime * torqueSpeed, ForceMode.Impulse);
+            TorqueAddition();
         }
 
+        GravityHandler();
+
+        OutOfBounds();
+    }
+
+    public Vector3 Direction()
+    {
+        return new Vector3(0, 0, 0) - transform.position;
+    }
+
+    public void GravityHandler()
+    {
         if (Input.GetKeyDown(KeyCode.Space) /*|| touch.phase == TouchPhase.Began*/)
         {
             sphereRb.useGravity = true;
             sphereRb.velocity = sphereRb.velocity;
             source.Play();
             sphereRb.constraints = RigidbodyConstraints.None;
+            MainManager.Instance.sphereCounter--;
         }
         else if (sphereRb.useGravity == false)
         {
@@ -60,8 +70,6 @@ public class SphereBehaviour : MonoBehaviour
 
             sphereRb.velocity = sphereRb.velocity - new Vector3(0, sphereRb.velocity.y, 0);
         }
-
-        OutOfBounds();
     }
 
     Vector3 RandomRotation()
@@ -71,7 +79,12 @@ public class SphereBehaviour : MonoBehaviour
         return torq;
     }
 
-    void OutOfBounds()
+    public virtual void TorqueAddition()
+    {
+        sphereRb.AddTorque(RandomRotation() * Time.deltaTime * torqueSpeed, ForceMode.Impulse);
+    }
+
+    public void OutOfBounds()
     {
         if (transform.position.x < -21 || transform.position.x > 21)
         {
