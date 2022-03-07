@@ -55,7 +55,11 @@ public class GameManager : MonoBehaviour
                 sphereCounter--;
             }
 
+<<<<<<< Updated upstream
             if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
+=======
+            if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter > 0 && isGameActive)
+>>>>>>> Stashed changes
             {
                 RandomIndex();
 
@@ -64,7 +68,11 @@ public class GameManager : MonoBehaviour
                 sphereCounter--;
 
             }
+<<<<<<< Updated upstream
             else if (FindObjectsOfType<ObjectBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
+=======
+            else if (FindObjectsOfType<SphereBehaviour>().Length == 0 && sphereCounter == 0 && isGameActive)
+>>>>>>> Stashed changes
             {
                 Debug.Log("Game Over");
 
@@ -73,8 +81,12 @@ public class GameManager : MonoBehaviour
                 restartButton.gameObject.SetActive(true);
                 gameOver.gameObject.SetActive(true);
 
+<<<<<<< Updated upstream
             }<anydesk
 
+=======
+            }
+>>>>>>> Stashed changes
 
             if (sphereCounter >= 0)
             {
